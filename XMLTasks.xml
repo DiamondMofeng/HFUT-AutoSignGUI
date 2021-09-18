@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TaskList
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="XMLTasks.xsd">
+	<Task id="Test">
+		<account>2019123456</account>
+		<solution>mode</solution>
+		<time>hh:mm</time>
+	</Task>
+	
+	<Task id="Test2">
+		<account>2019123456</account>
+		<solution>mode</solution>
+		<time>hh:mm</time>
+	</Task>
+	<Task id="">
+		<account>2019123456</account>
+		<solution>
+		</solution>
+		<time>14:50</time>
+	</Task>
+</TaskList>

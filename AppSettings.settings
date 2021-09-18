@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HFUT_AutoSignGUI" GeneratedClassName="AppSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="acc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2019123456</Value>
+    </Setting>
+    <Setting Name="pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123</Value>
+    </Setting>
+    <Setting Name="smtpServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.qq.com</Value>
+    </Setting>
+    <Setting Name="sender" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1234567890@qq.com</Value>
+    </Setting>
+    <Setting Name="smtpAuth" Type="System.String" Scope="User">
+      <Value Profile="(Default)">abcdefghijklmnop</Value>
+    </Setting>
+    <Setting Name="receiver" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1234567890@qq.com</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
