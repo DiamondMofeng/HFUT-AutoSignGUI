@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Edge.SeleniumTools;
+using OpenQA.Selenium;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
-using System.Linq;
-using OpenQA.Selenium;
-using Microsoft.Edge.SeleniumTools;
 //using OpenQA.Selenium.Edge;
 //using Microsoft.Edge;
 

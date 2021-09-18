@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Windows.Forms;
 
 namespace HFUT_AutoSignGUI
 {
-    
+
 
     //整体思路：
     /* 软件包括两级目录，一级目录下存放.exe,main.py,config.json(为保证安全可能设为隐藏)
@@ -75,7 +68,7 @@ namespace HFUT_AutoSignGUI
         {
             textBox_e_smtpAuth.UseSystemPasswordChar = !checkBox_e_showpass.Checked;
         }
-        
+
 
         private void button_t_get_Click(object sender, EventArgs e)
         {
@@ -227,7 +220,7 @@ namespace HFUT_AutoSignGUI
             if (checkBox_e_enable.Enabled == false) EmailEnabled = "0";
         }
 
-        
+
     }
     public class common
     {
@@ -242,7 +235,7 @@ namespace HFUT_AutoSignGUI
 
 
 
-        
+
 
         /// <summary>
         /// 获取并处理计划任务中关于自动打卡程序的信息，并以string返回相关信息

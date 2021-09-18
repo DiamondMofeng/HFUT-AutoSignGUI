@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -99,9 +93,9 @@ namespace HFUT_AutoSignGUI
             //        return;
             //}
             //检查基础信息是否有遗漏
-            if (checkBox_e_enable.Checked==true)
+            if (checkBox_e_enable.Checked == true)
             {
-                if(textBox_b_acc.Text==""
+                if (textBox_b_acc.Text == ""
                     || textBox_b_pass.Text == ""
                     || textBox_e_receiver.Text == ""
                     || textBox_e_sender.Text == ""
@@ -127,7 +121,7 @@ namespace HFUT_AutoSignGUI
                 errorMsg += "\r\n任务ID为空:\r\n    任务ID不应为空，且不能与现有项重复";
                 //return;
             }
-            else if (scripts.isTaskIDExists(textBox_t_taskID.Text,"XMLTasks.xml"))
+            else if (scripts.isTaskIDExists(textBox_t_taskID.Text, "XMLTasks.xml"))
             {
                 errorMsg += "\r\n任务ID与现有项重复:\r\n    任务ID不应为空，且不能与现有项重复";
             }
