@@ -72,9 +72,29 @@ namespace HFUT_AutoSignGUI
 
         private void button_t_get_Click(object sender, EventArgs e)
         {
-            textBox_t_get.Text = "";
+            textBox_t_testResult.Text = "";
+            //检查基础信息是否有遗漏
+            //foreach (Control t in this.Controls)
+            //{
+            //    if (t is not TextBox) continue;
+            //    if ((string)t.Tag == "tb")
+            //    {
+            //        if (t.Text == "" || t.Text.Contains(" "))
+            //            textBox_t_testResult.Text = "信息不能为空，且不能有空格";
+            //        return;
+            //    }
+            //    if ((string)t.Tag == "te" && checkBox_e_enable.Checked == true)
+            //    {
+            //        if (t.Text == "" || t.Text.Contains(" "))
+            //        {
+            //            textBox_t_testResult.Text = "信息不能为空，且不能有空格";
+            //            return;
+            //        }
+            //    }
+            //}
+            
             //textBox_t_get.Text = common.getSchtasks();
-            textBox_t_get.Text = scripts.signTest(textBox_b_acc.Text, textBox_b_pass.Text
+            textBox_t_testResult.Text = scripts.signTest(textBox_b_acc.Text, textBox_b_pass.Text
                 , EmailEnabled
                 , textBox_e_smtp.Text, textBox_e_sender.Text
                 , textBox_e_smtpAuth.Text, textBox_e_receiver.Text);
@@ -115,11 +135,17 @@ namespace HFUT_AutoSignGUI
                 if (dr == DialogResult.OK)
                 {
 
+                    
+
+
                     //在xml中删除对应项
                     //先获取想删除的ID
                     ListViewItem SelectedTaskItem = listView_t.SelectedItems[0];
                     string TaskID = SelectedTaskItem.Text;
-                    scripts.DeleteTask("XMLTasks.xml", TaskID);
+                    scripts.DeleteTaskInXML("XMLTasks.xml", TaskID);
+
+                    //在计划任务中删除对应项
+                    scripts.DeleteTaskInSchTasks(TaskID);
 
                     //再在listview中删除对应项
 

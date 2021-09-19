@@ -6,7 +6,7 @@
       <Value Profile="(Default)">2019123456</Value>
     </Setting>
     <Setting Name="pass" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123</Value>
+      <Value Profile="(Default)">password</Value>
     </Setting>
     <Setting Name="smtpServer" Type="System.String" Scope="User">
       <Value Profile="(Default)">smtp.qq.com</Value>

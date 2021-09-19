@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 //using OpenQA.Selenium.Edge;
@@ -51,10 +52,22 @@ namespace HFUT_AutoSignGUI
 
                 Console.Write("发送成功");
             }
+            catch (System.FormatException)
+            {
+                Console.Write("邮件发送失败，错误原因：" + "邮箱格式不正确");
+                return;
+            }
+            catch (System.Net.Mail.SmtpException)
+            {
+                Console.Write("邮件发送失败，错误原因：" + "smtp服务器连接错误，请检查相关信息");
+                return;
+            }
             catch (Exception ex)
             {
-                Console.Write("发送失败，错误原因：" + ex);
+                Console.Write("邮件发送失败，错误原因：" + ex);
+                return;
             }
+
             return;
         }
         /// <summary>
@@ -220,17 +233,18 @@ namespace HFUT_AutoSignGUI
 
 
 
-
+            p.WaitForExit();
             string Output = p.StandardOutput.ReadToEnd();
-
+            p.Close();
 
             if (filter == 1)
             {
 
 
+
                 //等待程序执行完退出进程
-                p.WaitForExit();
-                p.Close();
+
+
 
                 //使用正则表达式，若首字符(汉字)则输出
 
@@ -406,7 +420,51 @@ namespace HFUT_AutoSignGUI
         }
 
 
-        public static void DeleteTask(string XMLPath, string taskID)
+
+        public static void DeleteTaskInSchTasks(string taskID)
+        {
+            //启动cmd
+
+            Process p = new Process();
+            //设置要启动的应用程序
+            p.StartInfo.FileName = "cmd.exe";
+
+            //是否使用操作系统shell启动
+            p.StartInfo.UseShellExecute = false;
+            // 接受来自调用程序的输入信息
+            //p.StartInfo.Arguments = "";
+            p.StartInfo.RedirectStandardInput = true;
+            //输出信息
+            p.StartInfo.RedirectStandardOutput = true;
+            // 输出错误
+            p.StartInfo.RedirectStandardError = true;
+            //不显示程序窗口
+            p.StartInfo.CreateNoWindow = true;//set false for debug
+
+
+            //启动程序
+            p.Start();
+
+            //向cmd窗口发送输入信息
+            p.StandardInput.WriteLine("schtasks /delete /f /tn " + taskID);
+            //p.StandardInput.AutoFlush = true;
+            p.StandardInput.Close();
+
+            p.WaitForExit();
+            p.Close();
+
+
+            //debug
+            //string strOuput = p.StandardOutput.ReadToEnd();
+
+            //p.Close();
+
+            //Console.WriteLine(strOuput);
+
+            //Console.ReadKey();
+        }
+
+        public static void DeleteTaskInXML(string XMLPath, string taskID)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(XMLPath);
@@ -448,6 +506,109 @@ namespace HFUT_AutoSignGUI
                 return true;
             }
             else return false;
+        }
+        public static void CheckXMLExists()
+        {
+            //参考资料：https://www.cnblogs.com/guxia/p/8242483.html
+            XmlDocument xml = new XmlDocument();
+
+            //尝试读取现有文件，若读取失败则生成新xml文件
+            try
+            {
+                xml.Load("XMLTasks.xml");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                //添加XML标记(声明)
+                XmlDeclaration xmldecl;
+                xmldecl = xml.CreateXmlDeclaration("1.0", "utf-8", null);
+                xml.AppendChild(xmldecl);
+                //添加根元素TaskList
+                XmlElement AddTaskList = xml.CreateElement("", "TaskList", "");
+                xml.AppendChild(AddTaskList);
+
+                //scripts.addTaskToXML(xml);//for test
+
+                xml.Save("XMLTasks.xml");//保存这个xml文件
+
+            }
+
+
+
+
+
+
+
+        }
+        /// <summary>
+        /// 按照模板生成计划任务所用XML
+        /// </summary>
+        /// <param name="PathXMLpattern"></param>
+        /// <param name="PathXMLExport"></param>
+        /// <param name="taskID"></param>
+        /// <param name="hh"></param>
+        /// <param name="mm"></param>
+        /// <param name="TimerEnabled"></param>
+        /// <param name="LogonEnabled"></param>
+        /// <param name="ExecPath"></param>
+        /// <param name="Arguments"></param>
+        /// <param name="DirectoryPath"></param>
+        public static void GenerateTaskXMLFromPattern(string PathXMLpattern, string PathXMLExport
+       , string taskID
+       , string hh, string mm
+       , string TimerEnabled
+       , string LogonEnabled
+       , string ExecPath
+       , string Arguments
+       , string DirectoryPath)
+        {
+
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load("TaskPattern - br.xml");
+
+            // 加载命名空间，因为模板文档里面带了命名空间
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("p", "http://schemas.microsoft.com/windows/2004/02/mit/task");
+
+
+
+            XmlNode node;
+            XmlNode root = doc.DocumentElement;
+
+            //taskID
+            node = root.SelectSingleNode("/p:Task/p:RegistrationInfo/p:URI", nsmgr);
+            node.InnerText = "\\HFUT\\" + taskID;
+            //运行时间
+            node = root.SelectSingleNode("/p:Task/p:Triggers/p:CalendarTrigger/p:StartBoundary", nsmgr);
+            node.InnerText = "2021-01-01T" + hh + ":" + mm + ":00";
+            //是否定时运行
+            node = root.SelectSingleNode("/p:Task/p:Triggers/p:CalendarTrigger/p:Enabled", nsmgr);
+            node.InnerText = TimerEnabled;
+            //是否登陆时运行
+            node = root.SelectSingleNode("/p:Task/p:Triggers/p:LogonTrigger/p:Enabled", nsmgr);
+            node.InnerText = LogonEnabled;
+            //要运行的软件的路径
+            node = root.SelectSingleNode("/p:Task/p:Actions/p:Exec/p:Command", nsmgr);
+            node.InnerText = ExecPath;
+            //启动项参数
+            node = root.SelectSingleNode("/p:Task/p:Actions/p:Exec/p:Arguments", nsmgr);
+            node.InnerText = Arguments;
+            //工作目录
+            node = root.SelectSingleNode("/p:Task/p:Actions/p:Exec/p:WorkingDirectory", nsmgr);
+            node.InnerText = DirectoryPath;
+
+
+            //写入用户id，以通过安全性检查；无需外部参数
+            node = root.SelectSingleNode("/p:Task/p:Principals/p:Principal/p:UserId", nsmgr);
+            node.InnerText = Environment.UserName;
+
+
+
+
+            doc.Save("XMLout.xml");
+            //doc.Save(Console.Out);
+            //Console.ReadKey(true);
         }
     }
 }

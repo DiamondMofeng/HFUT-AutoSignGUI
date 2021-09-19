@@ -37,7 +37,7 @@ namespace HFUT_AutoSignGUI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("password")]
         public string pass {
             get {
                 return ((string)(this["pass"]));

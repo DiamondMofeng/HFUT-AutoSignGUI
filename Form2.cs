@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -62,6 +64,25 @@ namespace HFUT_AutoSignGUI
 
         private void button_signTest_Click(object sender, EventArgs e)
         {
+            textBox_t_testResult.Text = "";
+            ////检查基础信息是否有遗漏
+            //foreach (Control t in this.Controls)
+            //{
+            //    if (t is not TextBox) continue;
+            //    if ((string)t.Tag == "tb")
+            //    {
+            //        if (t.Text == "" || t.Text.Contains(" "))
+            //            textBox_t_testResult.Text = "信息不能为空，且不能有空格";
+            //        return;
+            //    }
+            //    if ((string)t.Tag == "te" && checkBox_e_enable.Checked==true )
+            //    {
+            //        if(t.Text == "" || t.Text.Contains(" ")){
+            //            textBox_t_testResult.Text = "信息不能为空，且不能有空格";
+            //            return;
+            //        }
+            //    }
+            //}
             textBox_t_testResult.Text = scripts.signTest(textBox_b_acc.Text, textBox_b_pass.Text
                 , EmailEnabled
                 , textBox_e_smtp.Text, textBox_e_sender.Text
@@ -85,13 +106,7 @@ namespace HFUT_AutoSignGUI
 
             //将错误逐渐累计，最后统一呈现
             string errorMsg = "";
-            //void showCheckResult()
-            //{
-            //    if (errorMsg != "")
-            //        MessageBox.Show(errorMsg, "保存失败");
-            //    else if (MessageBox.Show("所填信息无明显错误\r\n确定要保存吗？", "确认保存", MessageBoxButtons.OKCancel) != DialogResult.OK)
-            //        return;
-            //}
+
             //检查基础信息是否有遗漏
             if (checkBox_e_enable.Checked == true)
             {
@@ -116,30 +131,48 @@ namespace HFUT_AutoSignGUI
             }
 
             //检查任务id是否合理：是否不为空且不与现有id重复
-            if (textBox_t_taskID.Text == "")
+            //并将结果存入string taskID
+            string taskID = textBox_t_taskID.Text;
+            if (taskID == "")
             {
                 errorMsg += "\r\n任务ID为空:\r\n    任务ID不应为空，且不能与现有项重复";
                 //return;
             }
-            else if (scripts.isTaskIDExists(textBox_t_taskID.Text, "XMLTasks.xml"))
+            else if (scripts.isTaskIDExists(taskID, "XMLTasks.xml"))
             {
                 errorMsg += "\r\n任务ID与现有项重复:\r\n    任务ID不应为空，且不能与现有项重复";
             }
-            //检查mode设置合理性，并将结果存入string mode
+            else if (Regex.IsMatch(taskID, "[^A-Za-z0-9_]"))
+            {
+                errorMsg += "\r\n任务ID不符合规范:\r\n    任务ID只能包含数字、字母、下划线";
+
+            }
+
+
+            //检查mode设置合理性
+            //并将结果存入string TimerEnabled,OnlogonEnabled
+            //string mode用来显示Listview中信息
             string mode = "";
+            string TimerEnabled = "false";
+            string OnlogonEnabled = "false";
+
             if (checkBox_t_OnLogin.Checked == true && checkBox_t_Timer.Checked == true)
             {
-
+                mode = "开机时&定时";
+                TimerEnabled = "true";
+                OnlogonEnabled = "true";
             }
             else
             {
                 if (checkBox_t_OnLogin.Checked == true)
                 {
-
+                    mode = "开机时";
+                    OnlogonEnabled = "true";
                 }
                 else if (checkBox_t_Timer.Checked == true)
                 {
-
+                    mode = "定时打卡";
+                    TimerEnabled = "true";
                 }
                 else
                 {
@@ -147,10 +180,16 @@ namespace HFUT_AutoSignGUI
                     //return;
                 }
             }
-            //检查时间合理性，并将结果存入变量int hh,mm, string hh_str,mm_str
-            if (int.TryParse(textBox_t_hh.Text, out int hh) == false
-                || int.TryParse(textBox_t_mm.Text, out int mm) == false
-                || scripts.t_CheckTime(hh, mm) == false)
+            //检查时间合理性，并将结果存入变量int hh_,mm_, string hh,mm
+            string hh = textBox_t_hh.Text;
+            string mm = textBox_t_mm.Text;
+            if (checkBox_t_Timer.Checked == true &&
+                (
+                int.TryParse(textBox_t_hh.Text, out int hh_) == false
+                || int.TryParse(textBox_t_mm.Text, out int mm_) == false
+                || scripts.t_CheckTime(hh_, mm_) == false
+                )
+                )
             {
                 errorMsg += "\r\n时间输入不合理，请重新填写:\r\n    时间应晚于14:00，建议最少晚于14:30防止意外";
                 //return;
@@ -166,45 +205,83 @@ namespace HFUT_AutoSignGUI
                 return;
             ///////////////////////////////检查完毕！！///////////////////////////////
 
+            //处理计划任务所需参数
+
+            //运行参数-基础信息
+            string arguments = textBox_b_acc.Text + " " + textBox_b_pass.Text + " ";
+            if (checkBox_e_enable.Checked == true)
+            {
+                arguments += "1 " + textBox_e_smtp.Text + " " + textBox_e_sender.Text + " " + textBox_e_smtpAuth + " " + textBox_e_receiver.Text;
+            }
+            //额外debug信息
+            //string debug_log;
+            //string debug_driver;
+            //string debug_browser;
 
 
 
+            //本来想用纯schtasks命令去设置，奈于指令可扩展性比较低，于是换用先生成xml再用schtasks加载的方式。
+
+            //生成目标xml
+            scripts.GenerateTaskXMLFromPattern("TaskPattern.xml", "TaskCache.xml", taskID, hh, mm, TimerEnabled, OnlogonEnabled
+                , arguments //运行参数
+                , System.Windows.Forms.Application.StartupPath + "\\AutoSignEXE.exe", System.Windows.Forms.Application.StartupPath);
 
 
 
             ////打开cmd输入计划任务
+            //用cmd,schtasks /create /TN "taskID" /XML "XML.xml"导入计划任务
+
+            Process p = new Process();
+            //设置要启动的应用程序
+            p.StartInfo.FileName = "cmd.exe";
+
+            //是否使用操作系统shell启动
+            p.StartInfo.UseShellExecute = false;
+            // 接受来自调用程序的输入信息
+            //p.StartInfo.Arguments = "";
+
+            p.StartInfo.RedirectStandardInput = true;
+            //输出信息
+            p.StartInfo.RedirectStandardOutput = true;
+            // 输出错误
+            p.StartInfo.RedirectStandardError = true;
+            //不显示程序窗口
+            p.StartInfo.CreateNoWindow = false;//set false for debug
+            //启动程序
+            p.Start();
+
+            //向cmd窗口发送输入信息
+            p.StandardInput.WriteLine("schtasks /create" +
+                " /TN " + taskID +          //任务ID是强制选项
+                " /XML " + "TaskCache.xml");
+            p.StandardInput.Close();
+
+            string strOutput = p.StandardOutput.ReadToEnd();
+
+            p.WaitForExit();
+            p.Close();
+
+
 
 
             ////检查计划任务是否设置成功
 
+            if (strOutput.Contains("成功: 成功创建计划任务"))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("输出结果：" + strOutput, "创建任务出错");
+                return;
+            }
 
             ////保存数据至xml文件
+            XmlDocument xmlAddTask = new XmlDocument();
 
-            //参考资料：https://www.cnblogs.com/guxia/p/8242483.html
-            XmlDocument xml = new XmlDocument();
-
-            //尝试读取现有文件，若读取失败则生成新xml文件
-            try
-            {
-                xml.Load("XMLTasks.xml");
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                //添加XML标记(声明)
-                XmlDeclaration xmldecl;
-                xmldecl = xml.CreateXmlDeclaration("1.0", "utf-8", null);
-                xml.AppendChild(xmldecl);
-                //添加根元素TaskList
-                XmlElement AddTaskList = xml.CreateElement("", "TaskList", "");
-                xml.AppendChild(AddTaskList);
-
-                //scripts.addTaskToXML(xml);//for test
-
-                xml.Save("XMLTasks.xml");//保存这个xml文件
-
-            }
-            scripts.addTaskToXML(xml, textBox_t_taskID.Text, textBox_b_acc.Text, mode, textBox_t_hh.Text, textBox_t_mm.Text);
-            xml.Save("XMLTasks.xml");
+            scripts.addTaskToXML(xmlAddTask, textBox_t_taskID.Text, textBox_b_acc.Text, mode, textBox_t_hh.Text, textBox_t_mm.Text);
+            xmlAddTask.Save("XMLTasks.xml");
 
             //最后重新加载Form1的ListView
             //已在form1中实现
@@ -219,6 +296,17 @@ namespace HFUT_AutoSignGUI
         private void Form2_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox_t_Timer_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox_t_hh.Enabled = checkBox_t_Timer.Checked;
+            textBox_t_mm.Enabled = checkBox_t_Timer.Checked;
+            if (checkBox_t_Timer.Checked == false)
+            {
+                textBox_t_hh.Text = "";
+                textBox_t_mm.Text = "";
+            }
         }
     }
 }

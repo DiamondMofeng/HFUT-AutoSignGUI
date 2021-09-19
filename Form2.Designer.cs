@@ -40,7 +40,6 @@ namespace HFUT_AutoSignGUI
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_e_receiver = new System.Windows.Forms.TextBox();
             this.textBox_e_smtpAuth = new System.Windows.Forms.TextBox();
-            this.textBox_e_sender = new System.Windows.Forms.TextBox();
             this.textBox_e_smtp = new System.Windows.Forms.TextBox();
             this.textBox_b_pass = new System.Windows.Forms.TextBox();
             this.textBox_b_acc = new System.Windows.Forms.TextBox();
@@ -65,6 +64,7 @@ namespace HFUT_AutoSignGUI
             this.checkBox_b_showpass = new System.Windows.Forms.CheckBox();
             this.textBox_t_taskID = new System.Windows.Forms.TextBox();
             this.label_t_taskID = new System.Windows.Forms.Label();
+            this.textBox_e_sender = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // checkBox_t_OnLogin
@@ -158,6 +158,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_receiver.Name = "textBox_e_receiver";
             this.textBox_e_receiver.Size = new System.Drawing.Size(168, 27);
             this.textBox_e_receiver.TabIndex = 6;
+            this.textBox_e_receiver.Tag = "te";
             this.textBox_e_receiver.Text = "123456789@qq.com";
             // 
             // textBox_e_smtpAuth
@@ -166,16 +167,9 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_smtpAuth.Name = "textBox_e_smtpAuth";
             this.textBox_e_smtpAuth.Size = new System.Drawing.Size(168, 27);
             this.textBox_e_smtpAuth.TabIndex = 5;
+            this.textBox_e_smtpAuth.Tag = "te";
             this.textBox_e_smtpAuth.Text = "abcdefghijklmnop";
             this.textBox_e_smtpAuth.UseSystemPasswordChar = true;
-            // 
-            // textBox_e_sender
-            // 
-            this.textBox_e_sender.Location = new System.Drawing.Point(128, 283);
-            this.textBox_e_sender.Name = "textBox_e_sender";
-            this.textBox_e_sender.Size = new System.Drawing.Size(168, 27);
-            this.textBox_e_sender.TabIndex = 4;
-            this.textBox_e_sender.Text = "123456789@qq.com";
             // 
             // textBox_e_smtp
             // 
@@ -183,6 +177,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_smtp.Name = "textBox_e_smtp";
             this.textBox_e_smtp.Size = new System.Drawing.Size(168, 27);
             this.textBox_e_smtp.TabIndex = 3;
+            this.textBox_e_smtp.Tag = "te";
             this.textBox_e_smtp.Text = "smtp.qq.com";
             // 
             // textBox_b_pass
@@ -191,6 +186,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_b_pass.Name = "textBox_b_pass";
             this.textBox_b_pass.Size = new System.Drawing.Size(125, 27);
             this.textBox_b_pass.TabIndex = 1;
+            this.textBox_b_pass.Tag = "tb";
             this.textBox_b_pass.Text = "123";
             this.textBox_b_pass.UseSystemPasswordChar = true;
             // 
@@ -200,6 +196,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_b_acc.Name = "textBox_b_acc";
             this.textBox_b_acc.Size = new System.Drawing.Size(125, 27);
             this.textBox_b_acc.TabIndex = 0;
+            this.textBox_b_acc.Tag = "tb";
             this.textBox_b_acc.Text = "2019123456";
             // 
             // label_b_testResult
@@ -297,6 +294,7 @@ namespace HFUT_AutoSignGUI
             this.checkBox_t_Timer.TabIndex = 10;
             this.checkBox_t_Timer.Text = "定时执行";
             this.checkBox_t_Timer.UseVisualStyleBackColor = true;
+            this.checkBox_t_Timer.CheckedChanged += new System.EventHandler(this.checkBox_t_Timer_CheckedChanged);
             // 
             // button_s_save
             // 
@@ -338,19 +336,19 @@ namespace HFUT_AutoSignGUI
             // 
             // textBox_t_hh
             // 
+            this.textBox_t_hh.Enabled = false;
             this.textBox_t_hh.Location = new System.Drawing.Point(649, 135);
             this.textBox_t_hh.Name = "textBox_t_hh";
             this.textBox_t_hh.Size = new System.Drawing.Size(36, 27);
             this.textBox_t_hh.TabIndex = 11;
-            this.textBox_t_hh.Text = "14";
             // 
             // textBox_t_mm
             // 
+            this.textBox_t_mm.Enabled = false;
             this.textBox_t_mm.Location = new System.Drawing.Point(721, 135);
             this.textBox_t_mm.Name = "textBox_t_mm";
             this.textBox_t_mm.Size = new System.Drawing.Size(36, 27);
             this.textBox_t_mm.TabIndex = 12;
-            this.textBox_t_mm.Text = "50";
             // 
             // label15
             // 
@@ -397,6 +395,15 @@ namespace HFUT_AutoSignGUI
             this.label_t_taskID.Size = new System.Drawing.Size(54, 20);
             this.label_t_taskID.TabIndex = 20;
             this.label_t_taskID.Text = "任务ID";
+            // 
+            // textBox_e_sender
+            // 
+            this.textBox_e_sender.Location = new System.Drawing.Point(128, 283);
+            this.textBox_e_sender.Name = "textBox_e_sender";
+            this.textBox_e_sender.Size = new System.Drawing.Size(168, 27);
+            this.textBox_e_sender.TabIndex = 4;
+            this.textBox_e_sender.Tag = "te";
+            this.textBox_e_sender.Text = "123456789@qq.com";
             // 
             // Form2
             // 
@@ -460,7 +467,6 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_e_receiver;
         private System.Windows.Forms.TextBox textBox_e_smtpAuth;
-        private System.Windows.Forms.TextBox textBox_e_sender;
         private System.Windows.Forms.TextBox textBox_e_smtp;
         private System.Windows.Forms.TextBox textBox_b_pass;
         private System.Windows.Forms.TextBox textBox_b_acc;
@@ -485,5 +491,6 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.CheckBox checkBox_b_showpass;
         private System.Windows.Forms.TextBox textBox_t_taskID;
         private System.Windows.Forms.Label label_t_taskID;
+        private System.Windows.Forms.TextBox textBox_e_sender;
     }
 }
