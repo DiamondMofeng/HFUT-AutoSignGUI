@@ -213,6 +213,7 @@ namespace HFUT_AutoSignGUI
             {
                 arguments += "1 " + textBox_e_smtp.Text + " " + textBox_e_sender.Text + " " + textBox_e_smtpAuth + " " + textBox_e_receiver.Text;
             }
+            else arguments += "0 ";
             //额外debug信息
             //string debug_log;
             //string debug_driver;
@@ -224,13 +225,15 @@ namespace HFUT_AutoSignGUI
 
             //生成目标xml
             scripts.GenerateTaskXMLFromPattern("TaskPattern.xml", "TaskCache.xml", taskID, hh, mm, TimerEnabled, OnlogonEnabled
+                , System.Windows.Forms.Application.StartupPath + "AutoSignEXE.exe"//要运行的程序
                 , arguments //运行参数
-                , System.Windows.Forms.Application.StartupPath + "\\AutoSignEXE.exe", System.Windows.Forms.Application.StartupPath);
+                , System.Windows.Forms.Application.StartupPath);//运行目录
 
 
 
             ////打开cmd输入计划任务
             //用cmd,schtasks /create /TN "taskID" /XML "XML.xml"导入计划任务
+            //schtasks /create /tn testtt /xml "TaskCache.xml"
 
             Process p = new Process();
             //设置要启动的应用程序
@@ -247,7 +250,7 @@ namespace HFUT_AutoSignGUI
             // 输出错误
             p.StartInfo.RedirectStandardError = true;
             //不显示程序窗口
-            p.StartInfo.CreateNoWindow = false;//set false for debug
+            p.StartInfo.CreateNoWindow = true;//set false for debug
             //启动程序
             p.Start();
 
@@ -279,7 +282,7 @@ namespace HFUT_AutoSignGUI
 
             ////保存数据至xml文件
             XmlDocument xmlAddTask = new XmlDocument();
-
+            xmlAddTask.Load("XMLTasks.xml");
             scripts.addTaskToXML(xmlAddTask, textBox_t_taskID.Text, textBox_b_acc.Text, mode, textBox_t_hh.Text, textBox_t_mm.Text);
             xmlAddTask.Save("XMLTasks.xml");
 

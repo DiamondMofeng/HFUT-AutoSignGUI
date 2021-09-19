@@ -555,7 +555,7 @@ namespace HFUT_AutoSignGUI
         /// <param name="DirectoryPath"></param>
         public static void GenerateTaskXMLFromPattern(string PathXMLpattern, string PathXMLExport
        , string taskID
-       , string hh, string mm
+       , string hh , string mm
        , string TimerEnabled
        , string LogonEnabled
        , string ExecPath
@@ -565,7 +565,7 @@ namespace HFUT_AutoSignGUI
 
 
             XmlDocument doc = new XmlDocument();
-            doc.Load("TaskPattern - br.xml");
+            doc.Load(PathXMLpattern);
 
             // 加载命名空间，因为模板文档里面带了命名空间
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
@@ -580,8 +580,11 @@ namespace HFUT_AutoSignGUI
             node = root.SelectSingleNode("/p:Task/p:RegistrationInfo/p:URI", nsmgr);
             node.InnerText = "\\HFUT\\" + taskID;
             //运行时间
+            if (TimerEnabled == "true")
+            { 
             node = root.SelectSingleNode("/p:Task/p:Triggers/p:CalendarTrigger/p:StartBoundary", nsmgr);
             node.InnerText = "2021-01-01T" + hh + ":" + mm + ":00";
+            }
             //是否定时运行
             node = root.SelectSingleNode("/p:Task/p:Triggers/p:CalendarTrigger/p:Enabled", nsmgr);
             node.InnerText = TimerEnabled;
@@ -606,7 +609,7 @@ namespace HFUT_AutoSignGUI
 
 
 
-            doc.Save("XMLout.xml");
+            doc.Save(PathXMLExport);
             //doc.Save(Console.Out);
             //Console.ReadKey(true);
         }
