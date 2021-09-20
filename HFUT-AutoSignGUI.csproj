@@ -10,6 +10,8 @@
   <ItemGroup>
     <None Remove="main.py" />
     <None Remove="MicrosoftWebDriver.exe" />
+    <None Remove="XMLTasks.xml" />
+    <None Remove="XMLTasks.xsd" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="requires\" />
   </ItemGroup>
 
 </Project>
