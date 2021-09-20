@@ -43,7 +43,24 @@ namespace HFUT_AutoSignGUI
             if (scripts.Disclaimer() == false)
                 this.Close();
 
-            //if (!scripts.IsXMLExists("")) ;
+            if (!System.IO.File.Exists("msedgedriver.exe") || !System.IO.File.Exists("AutoSignEXE.exe"))
+            {
+                MessageBox.Show("缺少运行所需exe文件，将退出程序。\r\n" + "请重新下载", "错误：缺少运行所需文件");
+                this.Close();
+            }
+
+            //有空要做成自动生成的
+            if (!scripts.IsXMLExists("XMLTasks.xml") || !scripts.IsXMLExists("TaskPattern.xml"))
+            {
+                MessageBox.Show("缺少运行所需xml文件，将退出程序。\r\n" + "请重新下载", "错误：缺少运行所需文件");
+                this.Close();
+            }
+
+            MessageBox.Show("如果添加任务后要挪动本软件的位置，或更改所在文件夹的名字\r\n" +
+                "请务必先将所有任务删除！！！\r\n" +
+                "请务必先将所有任务删除！！！\r\n" +
+                "请务必先将所有任务删除！！！\r\n" +
+                "否则以前添加的任务可能会无法进行/无法通过本软件删除，变为系统垃圾", "重要的事情说三遍");
 
 
             scripts.LoadTasks("XMLTasks.xml", listView_t);
@@ -256,7 +273,7 @@ namespace HFUT_AutoSignGUI
 
         private void button_t_test_Click(object sender, EventArgs e)
         {
-            //如果没用选择，则不进行
+            //如果没有选择，则不进行
             if (listView_t.SelectedItems.Count == 0)
             {
                 return;
@@ -265,6 +282,10 @@ namespace HFUT_AutoSignGUI
 
             //清空现有信息
             textBox_t_testResult.Text = "";
+
+
+            MessageBox.Show("已开始测试，短时间内请勿重复测试造成卡顿", "注意");
+
             //获取所选项id
             string taskID = listView_t.SelectedItems[0].Text;
 

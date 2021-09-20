@@ -69,12 +69,12 @@ namespace HFUT_AutoSignGUI
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button_t_test = new System.Windows.Forms.Button();
             this.button_t_get = new System.Windows.Forms.Button();
+            this.button_t_openLog = new System.Windows.Forms.Button();
             this.checkBox_e_showpass = new System.Windows.Forms.CheckBox();
             this.button_b_test = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label_b_testResult = new System.Windows.Forms.Label();
             this.textBox_e_receiver = new System.Windows.Forms.TextBox();
-            this.button_t_openLog = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -203,6 +203,7 @@ namespace HFUT_AutoSignGUI
             this.label6.Size = new System.Drawing.Size(84, 20);
             this.label6.TabIndex = 6;
             this.label6.Text = "收件人邮箱";
+            this.toolTip1.SetToolTip(this.label6, "可以与发件人邮箱相同");
             // 
             // label7
             // 
@@ -440,6 +441,17 @@ namespace HFUT_AutoSignGUI
             this.button_t_get.UseVisualStyleBackColor = true;
             this.button_t_get.Click += new System.EventHandler(this.button_t_get_Click);
             // 
+            // button_t_openLog
+            // 
+            this.button_t_openLog.Location = new System.Drawing.Point(751, 297);
+            this.button_t_openLog.Name = "button_t_openLog";
+            this.button_t_openLog.Size = new System.Drawing.Size(82, 73);
+            this.button_t_openLog.TabIndex = 23;
+            this.button_t_openLog.Text = "查看运行日志";
+            this.toolTip1.SetToolTip(this.button_t_openLog, "最新运行结果在日志文件的最下方");
+            this.button_t_openLog.UseVisualStyleBackColor = true;
+            this.button_t_openLog.Click += new System.EventHandler(this.button_t_openLog_Click);
+            // 
             // checkBox_e_showpass
             // 
             this.checkBox_e_showpass.AutoSize = true;
@@ -489,17 +501,6 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_receiver.Tag = "te";
             this.textBox_e_receiver.Text = "123456789@qq.com";
             this.textBox_e_receiver.TextChanged += new System.EventHandler(this.textBox_e_receiver_TextChanged);
-            // 
-            // button_t_openLog
-            // 
-            this.button_t_openLog.Location = new System.Drawing.Point(751, 297);
-            this.button_t_openLog.Name = "button_t_openLog";
-            this.button_t_openLog.Size = new System.Drawing.Size(82, 73);
-            this.button_t_openLog.TabIndex = 23;
-            this.button_t_openLog.Text = "查看运行日志";
-            this.toolTip1.SetToolTip(this.button_t_openLog, "最新运行结果在最下方");
-            this.button_t_openLog.UseVisualStyleBackColor = true;
-            this.button_t_openLog.Click += new System.EventHandler(this.button_t_openLog_Click);
             // 
             // Form1
             // 

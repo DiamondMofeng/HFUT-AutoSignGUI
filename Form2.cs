@@ -211,7 +211,7 @@ namespace HFUT_AutoSignGUI
             string arguments = textBox_b_acc.Text + " " + textBox_b_pass.Text + " ";
             if (checkBox_e_enable.Checked == true)
             {
-                arguments += "1 " + textBox_e_smtp.Text + " " + textBox_e_sender.Text + " " + textBox_e_smtpAuth + " " + textBox_e_receiver.Text;
+                arguments += "1 " + textBox_e_smtp.Text + " " + textBox_e_sender.Text + " " + textBox_e_smtpAuth.Text + " " + textBox_e_receiver.Text;
             }
             else arguments += "0 0 0 0 0" + " ";
             //额外debug信息
