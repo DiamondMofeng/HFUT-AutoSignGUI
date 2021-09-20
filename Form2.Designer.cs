@@ -29,6 +29,7 @@ namespace HFUT_AutoSignGUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.checkBox_t_OnLogin = new System.Windows.Forms.CheckBox();
             this.checkBox_e_enable = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -65,16 +66,19 @@ namespace HFUT_AutoSignGUI
             this.textBox_t_taskID = new System.Windows.Forms.TextBox();
             this.label_t_taskID = new System.Windows.Forms.Label();
             this.textBox_e_sender = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // checkBox_t_OnLogin
             // 
             this.checkBox_t_OnLogin.AutoSize = true;
+            this.checkBox_t_OnLogin.Cursor = System.Windows.Forms.Cursors.Help;
             this.checkBox_t_OnLogin.Location = new System.Drawing.Point(592, 58);
             this.checkBox_t_OnLogin.Name = "checkBox_t_OnLogin";
             this.checkBox_t_OnLogin.Size = new System.Drawing.Size(136, 24);
             this.checkBox_t_OnLogin.TabIndex = 9;
             this.checkBox_t_OnLogin.Text = "启动电脑时执行";
+            this.toolTip1.SetToolTip(this.checkBox_t_OnLogin, "实际上为登录电脑用户时执行");
             this.checkBox_t_OnLogin.UseVisualStyleBackColor = true;
             // 
             // checkBox_e_enable
@@ -86,6 +90,7 @@ namespace HFUT_AutoSignGUI
             this.checkBox_e_enable.Size = new System.Drawing.Size(121, 24);
             this.checkBox_e_enable.TabIndex = 2;
             this.checkBox_e_enable.Text = "启用邮件模块";
+            this.toolTip1.SetToolTip(this.checkBox_e_enable, "打卡程序运行结束后，将结果发送至指定邮箱(可以自己发给自己)");
             this.checkBox_e_enable.UseVisualStyleBackColor = true;
             this.checkBox_e_enable.CheckedChanged += new System.EventHandler(this.checkBox_e_enable_CheckedChanged);
             // 
@@ -257,11 +262,13 @@ namespace HFUT_AutoSignGUI
             // 
             // button_signTest
             // 
+            this.button_signTest.Cursor = System.Windows.Forms.Cursors.Help;
             this.button_signTest.Location = new System.Drawing.Point(515, 190);
             this.button_signTest.Name = "button_signTest";
             this.button_signTest.Size = new System.Drawing.Size(113, 29);
             this.button_signTest.TabIndex = 13;
             this.button_signTest.Text = "打卡测试";
+            this.toolTip1.SetToolTip(this.button_signTest, "(仅本窗口用到左侧所填信息)进行测试，并将结果输出至下方文本框");
             this.button_signTest.UseVisualStyleBackColor = true;
             this.button_signTest.Click += new System.EventHandler(this.button_signTest_Click);
             // 
@@ -390,11 +397,13 @@ namespace HFUT_AutoSignGUI
             // label_t_taskID
             // 
             this.label_t_taskID.AutoSize = true;
+            this.label_t_taskID.Cursor = System.Windows.Forms.Cursors.Help;
             this.label_t_taskID.Location = new System.Drawing.Point(464, 24);
             this.label_t_taskID.Name = "label_t_taskID";
             this.label_t_taskID.Size = new System.Drawing.Size(54, 20);
             this.label_t_taskID.TabIndex = 20;
             this.label_t_taskID.Text = "任务ID";
+            this.toolTip1.SetToolTip(this.label_t_taskID, "每个任务都应有一个独立的标识符");
             // 
             // textBox_e_sender
             // 
@@ -404,6 +413,12 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_sender.TabIndex = 4;
             this.textBox_e_sender.Tag = "te";
             this.textBox_e_sender.Text = "123456789@qq.com";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 10000;
+            this.toolTip1.InitialDelay = 200;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // Form2
             // 
@@ -492,5 +507,6 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.TextBox textBox_t_taskID;
         private System.Windows.Forms.Label label_t_taskID;
         private System.Windows.Forms.TextBox textBox_e_sender;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

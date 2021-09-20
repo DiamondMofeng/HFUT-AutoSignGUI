@@ -49,7 +49,15 @@ namespace HFUT_AutoSignGUI
             this.label9 = new System.Windows.Forms.Label();
             this.checkBox_b_showpass = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.邮件模块ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.如何获取smtp相关信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.各邮箱smtp服务器地址ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.外部链接ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.githubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.免责声明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label12 = new System.Windows.Forms.Label();
             this.listView_t = new System.Windows.Forms.ListView();
             this.columnHeader_ID = new System.Windows.Forms.ColumnHeader();
@@ -59,12 +67,14 @@ namespace HFUT_AutoSignGUI
             this.button_t_add = new System.Windows.Forms.Button();
             this.button_t_del = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button_t_test = new System.Windows.Forms.Button();
+            this.button_t_get = new System.Windows.Forms.Button();
             this.checkBox_e_showpass = new System.Windows.Forms.CheckBox();
             this.button_b_test = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label_b_testResult = new System.Windows.Forms.Label();
             this.textBox_e_receiver = new System.Windows.Forms.TextBox();
-            this.button_t_get = new System.Windows.Forms.Button();
+            this.button_t_openLog = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,11 +90,11 @@ namespace HFUT_AutoSignGUI
             // 
             // textBox_t_testResult
             // 
-            this.textBox_t_testResult.Location = new System.Drawing.Point(534, 385);
+            this.textBox_t_testResult.Location = new System.Drawing.Point(403, 387);
             this.textBox_t_testResult.Multiline = true;
             this.textBox_t_testResult.Name = "textBox_t_testResult";
             this.textBox_t_testResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_t_testResult.Size = new System.Drawing.Size(330, 79);
+            this.textBox_t_testResult.Size = new System.Drawing.Size(440, 79);
             this.textBox_t_testResult.TabIndex = 22;
             this.textBox_t_testResult.Text = "测试结果";
             // 
@@ -250,6 +260,7 @@ namespace HFUT_AutoSignGUI
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.帮助ToolStripMenuItem,
             this.关于ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -257,11 +268,76 @@ namespace HFUT_AutoSignGUI
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.邮件模块ToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 邮件模块ToolStripMenuItem
+            // 
+            this.邮件模块ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.如何获取smtp相关信息ToolStripMenuItem,
+            this.各邮箱smtp服务器地址ToolStripMenuItem});
+            this.邮件模块ToolStripMenuItem.Name = "邮件模块ToolStripMenuItem";
+            this.邮件模块ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.邮件模块ToolStripMenuItem.Text = "邮件模块";
+            // 
+            // 如何获取smtp相关信息ToolStripMenuItem
+            // 
+            this.如何获取smtp相关信息ToolStripMenuItem.Name = "如何获取smtp相关信息ToolStripMenuItem";
+            this.如何获取smtp相关信息ToolStripMenuItem.Size = new System.Drawing.Size(319, 26);
+            this.如何获取smtp相关信息ToolStripMenuItem.Text = "如何获取smtp相关信息(百度经验)";
+            this.如何获取smtp相关信息ToolStripMenuItem.Click += new System.EventHandler(this.如何获取smtp相关信息ToolStripMenuItem_Click);
+            // 
+            // 各邮箱smtp服务器地址ToolStripMenuItem
+            // 
+            this.各邮箱smtp服务器地址ToolStripMenuItem.Name = "各邮箱smtp服务器地址ToolStripMenuItem";
+            this.各邮箱smtp服务器地址ToolStripMenuItem.Size = new System.Drawing.Size(319, 26);
+            this.各邮箱smtp服务器地址ToolStripMenuItem.Text = "各大邮箱smtp服务器地址";
+            this.各邮箱smtp服务器地址ToolStripMenuItem.Click += new System.EventHandler(this.各邮箱smtp服务器地址ToolStripMenuItem_Click);
+            // 
             // 关于ToolStripMenuItem
             // 
+            this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.外部链接ToolStripMenuItem,
+            this.免责声明ToolStripMenuItem,
+            this.关于ToolStripMenuItem1});
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.关于ToolStripMenuItem.Text = "关于";
+            // 
+            // 外部链接ToolStripMenuItem
+            // 
+            this.外部链接ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.githubPageToolStripMenuItem});
+            this.外部链接ToolStripMenuItem.Name = "外部链接ToolStripMenuItem";
+            this.外部链接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.外部链接ToolStripMenuItem.Text = "外部链接";
+            // 
+            // githubPageToolStripMenuItem
+            // 
+            this.githubPageToolStripMenuItem.Name = "githubPageToolStripMenuItem";
+            this.githubPageToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.githubPageToolStripMenuItem.Text = "Github Page";
+            this.githubPageToolStripMenuItem.Click += new System.EventHandler(this.githubPageToolStripMenuItem_Click_1);
+            // 
+            // 免责声明ToolStripMenuItem
+            // 
+            this.免责声明ToolStripMenuItem.Name = "免责声明ToolStripMenuItem";
+            this.免责声明ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.免责声明ToolStripMenuItem.Text = "免责声明";
+            this.免责声明ToolStripMenuItem.Click += new System.EventHandler(this.免责声明ToolStripMenuItem_Click);
+            // 
+            // 关于ToolStripMenuItem1
+            // 
+            this.关于ToolStripMenuItem1.Name = "关于ToolStripMenuItem1";
+            this.关于ToolStripMenuItem1.Size = new System.Drawing.Size(152, 26);
+            this.关于ToolStripMenuItem1.Text = "关于";
+            this.关于ToolStripMenuItem1.Click += new System.EventHandler(this.关于ToolStripMenuItem1_Click);
             // 
             // label12
             // 
@@ -281,7 +357,7 @@ namespace HFUT_AutoSignGUI
             this.columnHeader_time});
             this.listView_t.FullRowSelect = true;
             this.listView_t.HideSelection = false;
-            this.listView_t.Location = new System.Drawing.Point(403, 91);
+            this.listView_t.Location = new System.Drawing.Point(403, 78);
             this.listView_t.MultiSelect = false;
             this.listView_t.Name = "listView_t";
             this.listView_t.Size = new System.Drawing.Size(440, 200);
@@ -316,9 +392,9 @@ namespace HFUT_AutoSignGUI
             // 
             // button_t_add
             // 
-            this.button_t_add.Location = new System.Drawing.Point(466, 327);
+            this.button_t_add.Location = new System.Drawing.Point(414, 297);
             this.button_t_add.Name = "button_t_add";
-            this.button_t_add.Size = new System.Drawing.Size(113, 29);
+            this.button_t_add.Size = new System.Drawing.Size(147, 29);
             this.button_t_add.TabIndex = 20;
             this.button_t_add.Text = "添加定时任务";
             this.button_t_add.UseVisualStyleBackColor = true;
@@ -326,9 +402,9 @@ namespace HFUT_AutoSignGUI
             // 
             // button_t_del
             // 
-            this.button_t_del.Location = new System.Drawing.Point(664, 327);
+            this.button_t_del.Location = new System.Drawing.Point(584, 297);
             this.button_t_del.Name = "button_t_del";
-            this.button_t_del.Size = new System.Drawing.Size(113, 29);
+            this.button_t_del.Size = new System.Drawing.Size(147, 29);
             this.button_t_del.TabIndex = 20;
             this.button_t_del.Text = "删除定时任务";
             this.button_t_del.UseVisualStyleBackColor = true;
@@ -337,8 +413,32 @@ namespace HFUT_AutoSignGUI
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 10000;
-            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.InitialDelay = 200;
             this.toolTip1.ReshowDelay = 500;
+            // 
+            // button_t_test
+            // 
+            this.button_t_test.Cursor = System.Windows.Forms.Cursors.Help;
+            this.button_t_test.Location = new System.Drawing.Point(584, 341);
+            this.button_t_test.Name = "button_t_test";
+            this.button_t_test.Size = new System.Drawing.Size(147, 29);
+            this.button_t_test.TabIndex = 20;
+            this.button_t_test.Text = "测试所选任务";
+            this.toolTip1.SetToolTip(this.button_t_test, "立即执行上方所选任务以进行测试\r\n(运行结果将在 运行结束 后输出至日志log.txt中)\r\n请在最少半分钟后打开日志查看结果");
+            this.button_t_test.UseVisualStyleBackColor = true;
+            this.button_t_test.Click += new System.EventHandler(this.button_t_test_Click);
+            // 
+            // button_t_get
+            // 
+            this.button_t_get.Cursor = System.Windows.Forms.Cursors.Help;
+            this.button_t_get.Location = new System.Drawing.Point(414, 341);
+            this.button_t_get.Name = "button_t_get";
+            this.button_t_get.Size = new System.Drawing.Size(147, 29);
+            this.button_t_get.TabIndex = 21;
+            this.button_t_get.Text = "单次打卡测试";
+            this.toolTip1.SetToolTip(this.button_t_get, "用左侧所填信息进行测试，结果将显示于下方");
+            this.button_t_get.UseVisualStyleBackColor = true;
+            this.button_t_get.Click += new System.EventHandler(this.button_t_get_Click);
             // 
             // checkBox_e_showpass
             // 
@@ -390,21 +490,23 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_receiver.Text = "123456789@qq.com";
             this.textBox_e_receiver.TextChanged += new System.EventHandler(this.textBox_e_receiver_TextChanged);
             // 
-            // button_t_get
+            // button_t_openLog
             // 
-            this.button_t_get.Location = new System.Drawing.Point(332, 406);
-            this.button_t_get.Name = "button_t_get";
-            this.button_t_get.Size = new System.Drawing.Size(176, 29);
-            this.button_t_get.TabIndex = 21;
-            this.button_t_get.Text = "单次打卡测试";
-            this.button_t_get.UseVisualStyleBackColor = true;
-            this.button_t_get.Click += new System.EventHandler(this.button_t_get_Click);
+            this.button_t_openLog.Location = new System.Drawing.Point(751, 297);
+            this.button_t_openLog.Name = "button_t_openLog";
+            this.button_t_openLog.Size = new System.Drawing.Size(82, 73);
+            this.button_t_openLog.TabIndex = 23;
+            this.button_t_openLog.Text = "查看运行日志";
+            this.toolTip1.SetToolTip(this.button_t_openLog, "最新运行结果在最下方");
+            this.button_t_openLog.UseVisualStyleBackColor = true;
+            this.button_t_openLog.Click += new System.EventHandler(this.button_t_openLog_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 495);
+            this.Controls.Add(this.button_t_openLog);
             this.Controls.Add(this.listView_t);
             this.Controls.Add(this.checkBox_e_showpass);
             this.Controls.Add(this.checkBox_b_showpass);
@@ -430,6 +532,7 @@ namespace HFUT_AutoSignGUI
             this.Controls.Add(this.textBox_t_testResult);
             this.Controls.Add(this.button_t_get);
             this.Controls.Add(this.button_t_add);
+            this.Controls.Add(this.button_t_test);
             this.Controls.Add(this.button_t_del);
             this.Controls.Add(this.button_b_test);
             this.Controls.Add(this.button_e_test);
@@ -466,7 +569,6 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox_b_showpass;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ListView listView_t;
         private System.Windows.Forms.Button button_t_add;
@@ -482,6 +584,17 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.Label label_b_testResult;
         private System.Windows.Forms.TextBox textBox_e_receiver;
         private System.Windows.Forms.Button button_t_get;
+        private System.Windows.Forms.Button button_t_test;
+        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 邮件模块ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 如何获取smtp相关信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 免责声明ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 外部链接ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem githubPageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 各邮箱smtp服务器地址ToolStripMenuItem;
+        private System.Windows.Forms.Button button_t_openLog;
     }
 }
 

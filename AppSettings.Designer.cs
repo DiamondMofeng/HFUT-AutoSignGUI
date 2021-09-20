@@ -94,5 +94,17 @@ namespace HFUT_AutoSignGUI {
                 this["receiver"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Disclaimer {
+            get {
+                return ((bool)(this["Disclaimer"]));
+            }
+            set {
+                this["Disclaimer"] = value;
+            }
+        }
     }
 }

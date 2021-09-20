@@ -213,13 +213,14 @@ namespace HFUT_AutoSignGUI
             {
                 arguments += "1 " + textBox_e_smtp.Text + " " + textBox_e_sender.Text + " " + textBox_e_smtpAuth + " " + textBox_e_receiver.Text;
             }
-            else arguments += "0 ";
+            else arguments += "0 0 0 0 0" + " ";
             //额外debug信息
-            //string debug_log;
-            //string debug_driver;
-            //string debug_browser;
+            //在生成的xml中，默认：有log,无driver,无browser
+            string debug_log = " 1 ";
+            string debug_driver = " 0 ";
+            string debug_browser = " 0 ";
 
-
+            arguments += debug_log + debug_driver + debug_browser;
 
             //本来想用纯schtasks命令去设置，奈于指令可扩展性比较低，于是换用先生成xml再用schtasks加载的方式。
 

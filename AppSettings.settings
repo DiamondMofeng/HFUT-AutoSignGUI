@@ -20,5 +20,8 @@
     <Setting Name="receiver" Type="System.String" Scope="User">
       <Value Profile="(Default)">1234567890@qq.com</Value>
     </Setting>
+    <Setting Name="Disclaimer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

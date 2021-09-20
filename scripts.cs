@@ -613,5 +613,64 @@ namespace HFUT_AutoSignGUI
             //doc.Save(Console.Out);
             //Console.ReadKey(true);
         }
+        /// <summary>
+        /// return false if 没有接受免责声明
+        /// </summary>
+        public static bool Disclaimer()
+        {
+            if (AppSettings.Default.Disclaimer == false)
+            {
+                if (System.Windows.Forms.MessageBox.Show("若您使用本软件，则首先需要熟知并同意以下内容：" +
+                    "\r\n①本软件仅供同学在确认所提交的疫情相关报备信息准确无误的情况下使用，软件所使用打卡信息为前一天成功提交的内容，若其中涉及的任何内容发生改变，须根据真实情况自行修改疫情信息报备内容。 因使用本脚本可能带来的任何风险问题均由使用者本人承担。" +
+                    "\r\n②作者保证使用此软件所产生的敏感信息均仅存放于使用者的计算机中，且不会用于以目的为疫情信息填报以外的任何功能。" +
+                    "\r\n③本软件遵循 GPL-2.0 开源协议"
+                    , "免责声明", System.Windows.Forms.MessageBoxButtons.OKCancel) != System.Windows.Forms.DialogResult.OK)
+                {
+                    return false;
+                }
+                else
+                {
+                    AppSettings.Default.Disclaimer = true;
+                    AppSettings.Default.Save();
+                    return true;
+                }
+            }
+            else return true;
+        }
+        /// <summary>
+        /// 将输入字符串中的非字母、数字开头行剔除
+        /// </summary>
+        /// <param name="strToBeFlitred"></param>
+        /// <returns>过滤后的字符串</returns>
+        public static string Fliter(string strToBeFlitred)
+        {
+            string strOutput = "";
+            string[] ii = strToBeFlitred.Split("\r\n");
+            foreach (string i in ii)
+            {
+                if (i.Length >= 2)
+                {
+                    if (Regex.IsMatch(i.Substring(0, 1), "[^A-Za-z0-9_(]"))
+                    {
+                        strOutput = strOutput + i + "\r\n";
+                    }
+                }
+
+            }
+            return strOutput;
+        }
+        public static bool IsXMLExists(string XMLPath)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+            doc.Load(XMLPath);
+                return true;
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                return false;
+            }
+        }
     }
 }

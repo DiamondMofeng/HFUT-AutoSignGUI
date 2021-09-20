@@ -35,9 +35,17 @@ namespace HFUT_AutoSignGUI
             InitializeComponent();
             LoadSettings();
 
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            if (scripts.Disclaimer() == false)
+                this.Close();
+
+            //if (!scripts.IsXMLExists("")) ;
+
+
             scripts.LoadTasks("XMLTasks.xml", listView_t);
         }
         private void LoadSettings()
@@ -92,7 +100,7 @@ namespace HFUT_AutoSignGUI
             //        }
             //    }
             //}
-            
+
             //textBox_t_get.Text = common.getSchtasks();
             textBox_t_testResult.Text = scripts.signTest(textBox_b_acc.Text, textBox_b_pass.Text
                 , EmailEnabled
@@ -135,7 +143,7 @@ namespace HFUT_AutoSignGUI
                 if (dr == DialogResult.OK)
                 {
 
-                    
+
 
 
                     //在xml中删除对应项
@@ -242,11 +250,100 @@ namespace HFUT_AutoSignGUI
         string EmailEnabled = "0";
         private void checkBox_e_enable_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox_e_enable.Enabled == true) EmailEnabled = "1";
-            if (checkBox_e_enable.Enabled == false) EmailEnabled = "0";
+            if (checkBox_e_enable.Checked == true) EmailEnabled = "1";
+            if (checkBox_e_enable.Checked == false) EmailEnabled = "0";
+        }
+
+        private void button_t_test_Click(object sender, EventArgs e)
+        {
+            //如果没用选择，则不进行
+            if (listView_t.SelectedItems.Count == 0)
+            {
+                return;
+            }
+
+
+            //清空现有信息
+            textBox_t_testResult.Text = "";
+            //获取所选项id
+            string taskID = listView_t.SelectedItems[0].Text;
+
+            //用cmd
+            //schtasks /run taskID来测试
+            //启动cmd
+            Process p = new Process();
+            //设置要启动的应用程序
+            p.StartInfo.FileName = "cmd.exe";
+            //是否使用操作系统shell启动
+            p.StartInfo.UseShellExecute = false;
+            // 接受来自调用程序的输入信息
+            p.StartInfo.RedirectStandardInput = true;
+            //输出信息
+            p.StartInfo.RedirectStandardOutput = true;
+            // 输出错误
+            p.StartInfo.RedirectStandardError = true;
+            //不显示程序窗口
+            p.StartInfo.CreateNoWindow = true;
+            //启动程序
+            p.Start();
+
+            //向cmd窗口发送输入信息
+            p.StandardInput.WriteLine("schtasks /run /tn " + taskID);
+
+            p.StandardInput.AutoFlush = true;
+
+            p.StandardInput.Close();
+            //获取输出信息
+            string strOuput = p.StandardOutput.ReadToEnd();
+            //等待程序执行完退出进程
+            p.WaitForExit();
+            p.Close();
+
+            textBox_t_testResult.Text = scripts.Fliter(strOuput);
+
+
+
+
+        }
+
+        private void 如何获取smtp相关信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "https://jingyan.baidu.com/article/b0b63dbf1b2ef54a49307054.html");
         }
 
 
+        private void 免责声明ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("若您使用本软件，则视为您已熟知并同意以下内容：" +
+                    "\r\n①本软件仅供同学在确认所提交的疫情相关报备信息准确无误的情况下使用，软件所使用打卡信息为前一天成功提交的内容，若其中涉及的任何内容发生改变，须根据真实情况自行修改疫情信息报备内容。 因使用本脚本可能带来的任何风险问题均由使用者本人承担。" +
+                    "\r\n②作者保证使用此软件所产生的敏感信息均仅存放于使用者的计算机中，且不会用于以目的为疫情信息填报以外的任何功能。" +
+                    "\r\n③本软件遵循 GPL-2.0 开源协议"
+                    , "免责声明");
+        }
+
+        private void 关于ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("本软件仅供学习交流，如作他用所承受的法律责任一概与作者无关" +
+                "\r\n合工大自动打卡" + " Version:" + Version +
+                "\r\n编程语言： C# .Net 5 " +
+                "\r\n" +
+                "", "关于 合工大自动打卡");
+        }
+
+        private void githubPageToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "https://github.com/DiamondMofeng/");
+        }
+
+        private void 各邮箱smtp服务器地址ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "https://www.cnblogs.com/lxwphp/p/7731252.html");
+        }
+
+        private void button_t_openLog_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", Application.StartupPath + "log.txt");
+        }
     }
     public class common
     {
