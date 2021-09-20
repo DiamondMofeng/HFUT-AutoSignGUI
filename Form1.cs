@@ -77,13 +77,7 @@ namespace HFUT_AutoSignGUI
             textBox_e_receiver.Text = AppSettings.Default.receiver;
 
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            //textBox_e_smtp.Enabled = checkBox_email.Checked;
-            //textBox_e_sender.Enabled = checkBox_email.Checked;
-            //textBox_e_smtpAuth.Enabled = checkBox_email.Checked;
-            //textBox_e_receiver.Enabled = checkBox_email.Checked;
-        }
+        
 
         private void checkBox_b_showpass_CheckedChanged(object sender, EventArgs e)
         {

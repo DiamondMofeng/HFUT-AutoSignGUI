@@ -14,6 +14,12 @@ namespace HFUT_AutoSignGUI
             InitializeComponent();
         }
 
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
+        }
+
         private void checkBox_b_showpass_CheckedChanged(object sender, EventArgs e)
         {
             textBox_b_pass.UseSystemPasswordChar = !checkBox_b_showpass.Checked;
@@ -297,10 +303,7 @@ namespace HFUT_AutoSignGUI
             }
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void checkBox_t_Timer_CheckedChanged(object sender, EventArgs e)
         {
@@ -311,6 +314,55 @@ namespace HFUT_AutoSignGUI
                 textBox_t_hh.Text = "";
                 textBox_t_mm.Text = "";
             }
+        }
+
+
+        private void LoadSettings()
+        {
+            //
+            textBox_b_acc.Text = AppSettings.Default.acc2;
+            textBox_b_pass.Text = AppSettings.Default.pass2;
+            //
+            textBox_e_smtp.Text = AppSettings.Default.smtpServer2;
+            textBox_e_smtpAuth.Text = AppSettings.Default.smtpAuth2;
+            textBox_e_sender.Text = AppSettings.Default.sender2;
+            textBox_e_receiver.Text = AppSettings.Default.receiver2;
+
+        }
+        private void textBox_b_acc_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.acc2 = textBox_b_acc.Text;
+            AppSettings.Default.Save();
+        }
+
+        private void textBox_b_pass_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.pass2 = textBox_b_pass.Text;
+            AppSettings.Default.Save();
+        }
+
+        private void textBox_e_smtp_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.smtpServer2 = textBox_e_smtp.Text;
+            AppSettings.Default.Save();
+        }
+
+        private void textBox_e_sender_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.sender2 = textBox_e_sender.Text;
+            AppSettings.Default.Save();
+        }
+
+        private void textBox_e_smtpAuth_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.smtpAuth2 = textBox_e_smtpAuth.Text;
+            AppSettings.Default.Save();
+        }
+
+        private void textBox_e_receiver_TextChanged(object sender, EventArgs e)
+        {
+            AppSettings.Default.receiver2 = textBox_e_receiver.Text;
+            AppSettings.Default.Save();
         }
     }
 }

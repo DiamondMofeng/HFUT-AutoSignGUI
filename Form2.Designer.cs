@@ -165,6 +165,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_receiver.TabIndex = 6;
             this.textBox_e_receiver.Tag = "te";
             this.textBox_e_receiver.Text = "123456789@qq.com";
+            this.textBox_e_receiver.TextChanged += new System.EventHandler(this.textBox_e_receiver_TextChanged);
             // 
             // textBox_e_smtpAuth
             // 
@@ -175,6 +176,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_smtpAuth.Tag = "te";
             this.textBox_e_smtpAuth.Text = "abcdefghijklmnop";
             this.textBox_e_smtpAuth.UseSystemPasswordChar = true;
+            this.textBox_e_smtpAuth.TextChanged += new System.EventHandler(this.textBox_e_smtpAuth_TextChanged);
             // 
             // textBox_e_smtp
             // 
@@ -184,6 +186,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_smtp.TabIndex = 3;
             this.textBox_e_smtp.Tag = "te";
             this.textBox_e_smtp.Text = "smtp.qq.com";
+            this.textBox_e_smtp.TextChanged += new System.EventHandler(this.textBox_e_smtp_TextChanged);
             // 
             // textBox_b_pass
             // 
@@ -194,6 +197,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_b_pass.Tag = "tb";
             this.textBox_b_pass.Text = "123";
             this.textBox_b_pass.UseSystemPasswordChar = true;
+            this.textBox_b_pass.TextChanged += new System.EventHandler(this.textBox_b_pass_TextChanged);
             // 
             // textBox_b_acc
             // 
@@ -203,6 +207,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_b_acc.TabIndex = 0;
             this.textBox_b_acc.Tag = "tb";
             this.textBox_b_acc.Text = "2019123456";
+            this.textBox_b_acc.TextChanged += new System.EventHandler(this.textBox_b_acc_TextChanged);
             // 
             // label_b_testResult
             // 
@@ -413,6 +418,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_e_sender.TabIndex = 4;
             this.textBox_e_sender.Tag = "te";
             this.textBox_e_sender.Text = "123456789@qq.com";
+            this.textBox_e_sender.TextChanged += new System.EventHandler(this.textBox_e_sender_TextChanged);
             // 
             // toolTip1
             // 

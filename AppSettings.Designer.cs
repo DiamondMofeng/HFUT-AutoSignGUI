@@ -106,5 +106,77 @@ namespace HFUT_AutoSignGUI {
                 this["Disclaimer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string acc2 {
+            get {
+                return ((string)(this["acc2"]));
+            }
+            set {
+                this["acc2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pass2 {
+            get {
+                return ((string)(this["pass2"]));
+            }
+            set {
+                this["pass2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string smtpServer2 {
+            get {
+                return ((string)(this["smtpServer2"]));
+            }
+            set {
+                this["smtpServer2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sender2 {
+            get {
+                return ((string)(this["sender2"]));
+            }
+            set {
+                this["sender2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string smtpAuth2 {
+            get {
+                return ((string)(this["smtpAuth2"]));
+            }
+            set {
+                this["smtpAuth2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string receiver2 {
+            get {
+                return ((string)(this["receiver2"]));
+            }
+            set {
+                this["receiver2"] = value;
+            }
+        }
     }
 }
