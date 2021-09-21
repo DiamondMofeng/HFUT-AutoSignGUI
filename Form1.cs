@@ -29,7 +29,8 @@ namespace HFUT_AutoSignGUI
      */
     public partial class Form1 : Form
     {
-        string Version = "1.0.1";
+        public static string Version = "1.0.1";
+        public static string License = "GPL-3.0";
         public Form1()
         {
             InitializeComponent();
@@ -67,7 +68,7 @@ namespace HFUT_AutoSignGUI
             scripts.LoadTasks("XMLTasks.xml", listView_t);
 
             //LoadConlumnWidth();
-            
+
         }
         private void LoadSettings()
         {
@@ -81,7 +82,7 @@ namespace HFUT_AutoSignGUI
             textBox_e_receiver.Text = AppSettings.Default.receiver;
 
         }
-        
+
 
         private void checkBox_b_showpass_CheckedChanged(object sender, EventArgs e)
         {
@@ -338,7 +339,7 @@ namespace HFUT_AutoSignGUI
             MessageBox.Show("若您使用本软件，则视为您已熟知并同意以下内容：" +
                     "\r\n①本软件仅供同学在确认所提交的疫情相关报备信息准确无误的情况下使用，软件所使用打卡信息为前一天成功提交的内容，若其中涉及的任何内容发生改变，须根据真实情况自行修改疫情信息报备内容。 因使用本脚本可能带来的任何风险问题均由使用者本人承担。" +
                     "\r\n②作者保证使用此软件所产生的敏感信息均仅存放于使用者的计算机中，且不会用于以目的为疫情信息填报以外的任何功能。" +
-                    "\r\n③本软件遵循 GPL v3 开源协议"
+                    "\r\n③本软件遵循 " + License + " 开源协议"
                     , "免责声明");
         }
 
@@ -365,7 +366,7 @@ namespace HFUT_AutoSignGUI
         {
             if (!System.IO.File.Exists("log.txt"))
             {
-                MessageBox.Show("当前还没有生成任何日志","打开日志失败");
+                MessageBox.Show("当前还没有生成任何日志", "打开日志失败");
                 return;
             }
             Process.Start("notepad.exe", Application.StartupPath + "log.txt");
