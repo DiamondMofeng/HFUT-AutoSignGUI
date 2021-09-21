@@ -97,11 +97,13 @@ namespace HFUT_AutoSignGUI
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Cursor = System.Windows.Forms.Cursors.Help;
             this.label6.Location = new System.Drawing.Point(30, 363);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 20);
             this.label6.TabIndex = 15;
             this.label6.Text = "收件人邮箱";
+            this.toolTip1.SetToolTip(this.label6, "可以自己发给自己");
             // 
             // label4
             // 

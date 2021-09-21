@@ -407,7 +407,7 @@ namespace HFUT_AutoSignGUI
             this.button_t_del.Name = "button_t_del";
             this.button_t_del.Size = new System.Drawing.Size(147, 29);
             this.button_t_del.TabIndex = 20;
-            this.button_t_del.Text = "删除定时任务";
+            this.button_t_del.Text = "删除所选任务";
             this.button_t_del.UseVisualStyleBackColor = true;
             this.button_t_del.Click += new System.EventHandler(this.button_t_del_Click);
             // 

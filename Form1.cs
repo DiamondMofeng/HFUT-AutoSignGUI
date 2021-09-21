@@ -29,7 +29,7 @@ namespace HFUT_AutoSignGUI
      */
     public partial class Form1 : Form
     {
-        string Version = "1.0.0b";
+        string Version = "1.0.1";
         public Form1()
         {
             InitializeComponent();
@@ -56,7 +56,8 @@ namespace HFUT_AutoSignGUI
                 this.Close();
             }
 
-            MessageBox.Show("如果添加任务后要挪动本软件的位置，或更改所在文件夹的名字\r\n" +
+            MessageBox.Show("使用本软件前应确定好软件的位置，因为随便移动会导致问题：\r\n" +
+                "如果添加任务后要挪动本软件的位置，或更改所在文件夹的名字\r\n" +
                 "请务必先将所有任务删除！！！\r\n" +
                 "请务必先将所有任务删除！！！\r\n" +
                 "请务必先将所有任务删除！！！\r\n" +
@@ -278,7 +279,9 @@ namespace HFUT_AutoSignGUI
             textBox_t_testResult.Text = "";
 
 
-            MessageBox.Show("已开始测试，短时间内请勿重复测试造成卡顿", "注意");
+            MessageBox.Show("已开始测试，短时间内请勿重复测试造成卡顿" +
+                "\r\n请在大约半分钟后打开运行日志查看结果" +
+                "\r\n(测试结果不会在下方显示)", "注意");
 
             //获取所选项id
             string taskID = listView_t.SelectedItems[0].Text;
@@ -347,7 +350,7 @@ namespace HFUT_AutoSignGUI
 
         private void githubPageToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", "https://github.com/DiamondMofeng/");
+            Process.Start("explorer.exe", "https://github.com/DiamondMofeng/HFUT-AutoSignGUI");
         }
 
         private void 各邮箱smtp服务器地址ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -357,6 +360,11 @@ namespace HFUT_AutoSignGUI
 
         private void button_t_openLog_Click(object sender, EventArgs e)
         {
+            if (!System.IO.File.Exists("log.txt"))
+            {
+                MessageBox.Show("当前还没有生成任何日志","打开日志失败");
+                return;
+            }
             Process.Start("notepad.exe", Application.StartupPath + "log.txt");
         }
     }

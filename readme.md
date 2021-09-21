@@ -13,3 +13,6 @@
 
 ## 使用方法：
 
+## 贡献者：
+[Spartan-zhu](https://github.com/Spartan-zhu) for debugging
+
