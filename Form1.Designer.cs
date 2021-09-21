@@ -56,7 +56,9 @@ namespace HFUT_AutoSignGUI
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外部链接ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.githubPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mofengsBlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.免责声明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.鸣谢ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label12 = new System.Windows.Forms.Label();
             this.listView_t = new System.Windows.Forms.ListView();
@@ -95,7 +97,7 @@ namespace HFUT_AutoSignGUI
             this.textBox_t_testResult.Name = "textBox_t_testResult";
             this.textBox_t_testResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_t_testResult.Size = new System.Drawing.Size(440, 79);
-            this.textBox_t_testResult.TabIndex = 22;
+            this.textBox_t_testResult.TabIndex = 26;
             this.textBox_t_testResult.Text = "测试结果";
             // 
             // textBox_b_acc
@@ -198,6 +200,7 @@ namespace HFUT_AutoSignGUI
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Cursor = System.Windows.Forms.Cursors.Help;
             this.label6.Location = new System.Drawing.Point(18, 363);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(84, 20);
@@ -239,11 +242,13 @@ namespace HFUT_AutoSignGUI
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Cursor = System.Windows.Forms.Cursors.Help;
             this.label9.Location = new System.Drawing.Point(99, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 20);
             this.label9.TabIndex = 6;
             this.label9.Text = "基本信息";
+            this.toolTip1.SetToolTip(this.label9, "密码为学校Cas统一认证所用密码");
             // 
             // checkBox_b_showpass
             // 
@@ -305,6 +310,7 @@ namespace HFUT_AutoSignGUI
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.外部链接ToolStripMenuItem,
             this.免责声明ToolStripMenuItem,
+            this.鸣谢ToolStripMenuItem,
             this.关于ToolStripMenuItem1});
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -314,7 +320,8 @@ namespace HFUT_AutoSignGUI
             // 外部链接ToolStripMenuItem
             // 
             this.外部链接ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.githubPageToolStripMenuItem});
+            this.githubPageToolStripMenuItem,
+            this.mofengsBlogToolStripMenuItem});
             this.外部链接ToolStripMenuItem.Name = "外部链接ToolStripMenuItem";
             this.外部链接ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.外部链接ToolStripMenuItem.Text = "外部链接";
@@ -322,9 +329,16 @@ namespace HFUT_AutoSignGUI
             // githubPageToolStripMenuItem
             // 
             this.githubPageToolStripMenuItem.Name = "githubPageToolStripMenuItem";
-            this.githubPageToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.githubPageToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.githubPageToolStripMenuItem.Text = "Github Page";
             this.githubPageToolStripMenuItem.Click += new System.EventHandler(this.githubPageToolStripMenuItem_Click_1);
+            // 
+            // mofengsBlogToolStripMenuItem
+            // 
+            this.mofengsBlogToolStripMenuItem.Name = "mofengsBlogToolStripMenuItem";
+            this.mofengsBlogToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.mofengsBlogToolStripMenuItem.Text = "Mofeng\'s Blog";
+            this.mofengsBlogToolStripMenuItem.Click += new System.EventHandler(this.mofengsBlogToolStripMenuItem_Click);
             // 
             // 免责声明ToolStripMenuItem
             // 
@@ -332,6 +346,13 @@ namespace HFUT_AutoSignGUI
             this.免责声明ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.免责声明ToolStripMenuItem.Text = "免责声明";
             this.免责声明ToolStripMenuItem.Click += new System.EventHandler(this.免责声明ToolStripMenuItem_Click);
+            // 
+            // 鸣谢ToolStripMenuItem
+            // 
+            this.鸣谢ToolStripMenuItem.Name = "鸣谢ToolStripMenuItem";
+            this.鸣谢ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.鸣谢ToolStripMenuItem.Text = "鸣谢";
+            this.鸣谢ToolStripMenuItem.Click += new System.EventHandler(this.鸣谢ToolStripMenuItem_Click);
             // 
             // 关于ToolStripMenuItem1
             // 
@@ -366,30 +387,32 @@ namespace HFUT_AutoSignGUI
             this.listView_t.TabIndex = 10;
             this.listView_t.UseCompatibleStateImageBehavior = false;
             this.listView_t.View = System.Windows.Forms.View.Details;
+            this.listView_t.ColumnWidthChanged += new System.Windows.Forms.ColumnWidthChangedEventHandler(this.listView_t_ColumnWidthChanged);
             this.listView_t.SelectedIndexChanged += new System.EventHandler(this.listView_t_SelectedIndexChanged);
             // 
             // columnHeader_ID
             // 
             this.columnHeader_ID.Text = "任务ID";
             this.columnHeader_ID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader_ID.Width = AppSettings.Default.CWidth_id;
             // 
             // columnHeader_acc
             // 
             this.columnHeader_acc.Text = "学号";
             this.columnHeader_acc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader_acc.Width = 140;
+            this.columnHeader_acc.Width = AppSettings.Default.CWidth_acc;
             // 
             // columnHeader_type
             // 
             this.columnHeader_type.Text = "执行方式";
             this.columnHeader_type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader_type.Width = 100;
+            this.columnHeader_type.Width = AppSettings.Default.CWidth_mode;
             // 
             // columnHeader_time
             // 
             this.columnHeader_time.Text = "设定时间";
             this.columnHeader_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader_time.Width = 140;
+            this.columnHeader_time.Width = AppSettings.Default.CWidth_time;
             // 
             // button_t_add
             // 
@@ -406,7 +429,7 @@ namespace HFUT_AutoSignGUI
             this.button_t_del.Location = new System.Drawing.Point(584, 297);
             this.button_t_del.Name = "button_t_del";
             this.button_t_del.Size = new System.Drawing.Size(147, 29);
-            this.button_t_del.TabIndex = 20;
+            this.button_t_del.TabIndex = 21;
             this.button_t_del.Text = "删除所选任务";
             this.button_t_del.UseVisualStyleBackColor = true;
             this.button_t_del.Click += new System.EventHandler(this.button_t_del_Click);
@@ -423,7 +446,7 @@ namespace HFUT_AutoSignGUI
             this.button_t_test.Location = new System.Drawing.Point(584, 341);
             this.button_t_test.Name = "button_t_test";
             this.button_t_test.Size = new System.Drawing.Size(147, 29);
-            this.button_t_test.TabIndex = 20;
+            this.button_t_test.TabIndex = 24;
             this.button_t_test.Text = "测试所选任务";
             this.toolTip1.SetToolTip(this.button_t_test, "立即执行上方所选任务以进行测试\r\n(运行结果将在 运行结束 后输出至日志log.txt中)\r\n请在最少半分钟后打开日志查看结果");
             this.button_t_test.UseVisualStyleBackColor = true;
@@ -435,7 +458,7 @@ namespace HFUT_AutoSignGUI
             this.button_t_get.Location = new System.Drawing.Point(414, 341);
             this.button_t_get.Name = "button_t_get";
             this.button_t_get.Size = new System.Drawing.Size(147, 29);
-            this.button_t_get.TabIndex = 21;
+            this.button_t_get.TabIndex = 23;
             this.button_t_get.Text = "单次打卡测试";
             this.toolTip1.SetToolTip(this.button_t_get, "用左侧所填信息进行测试，结果将显示于下方");
             this.button_t_get.UseVisualStyleBackColor = true;
@@ -446,7 +469,7 @@ namespace HFUT_AutoSignGUI
             this.button_t_openLog.Location = new System.Drawing.Point(751, 297);
             this.button_t_openLog.Name = "button_t_openLog";
             this.button_t_openLog.Size = new System.Drawing.Size(82, 73);
-            this.button_t_openLog.TabIndex = 23;
+            this.button_t_openLog.TabIndex = 25;
             this.button_t_openLog.Text = "查看运行日志";
             this.toolTip1.SetToolTip(this.button_t_openLog, "最新运行结果在日志文件的最下方");
             this.button_t_openLog.UseVisualStyleBackColor = true;
@@ -596,6 +619,8 @@ namespace HFUT_AutoSignGUI
         private System.Windows.Forms.ToolStripMenuItem githubPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 各邮箱smtp服务器地址ToolStripMenuItem;
         private System.Windows.Forms.Button button_t_openLog;
+        private System.Windows.Forms.ToolStripMenuItem mofengsBlogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 鸣谢ToolStripMenuItem;
     }
 }
 

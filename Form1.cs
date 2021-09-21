@@ -65,6 +65,9 @@ namespace HFUT_AutoSignGUI
 
 
             scripts.LoadTasks("XMLTasks.xml", listView_t);
+
+            //LoadConlumnWidth();
+            
         }
         private void LoadSettings()
         {
@@ -344,7 +347,7 @@ namespace HFUT_AutoSignGUI
             MessageBox.Show("本软件仅供学习交流，如作他用所承受的法律责任一概与作者无关" +
                 "\r\n合工大自动打卡" + " Version:" + Version +
                 "\r\n编程语言： C# .Net 5 " +
-                "\r\n" +
+                "\r\nProgrammed by Mofeng" +
                 "", "关于 合工大自动打卡");
         }
 
@@ -367,6 +370,34 @@ namespace HFUT_AutoSignGUI
             }
             Process.Start("notepad.exe", Application.StartupPath + "log.txt");
         }
+
+        private void mofengsBlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "https://blog.mofengfeng.com");
+        }
+
+        private void 鸣谢ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thanks Spartan-zhu for debugging!", "Acknowledgement");
+        }
+
+        private void listView_t_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
+        {
+            AppSettings.Default.CWidth_id = listView_t.Columns[0].Width;
+            AppSettings.Default.CWidth_acc = listView_t.Columns[1].Width;
+            AppSettings.Default.CWidth_mode = listView_t.Columns[2].Width;
+            AppSettings.Default.CWidth_time = listView_t.Columns[3].Width;
+            AppSettings.Default.Save();
+        }
+        //private void LoadConlumnWidth()
+        //{
+        //    listView_t.Columns[0].Width = AppSettings.Default.CWidth_id;
+        //    listView_t.Columns[1].Width = AppSettings.Default.CWidth_acc;
+        //    listView_t.Columns[2].Width = AppSettings.Default.CWidth_mode;
+        //    listView_t.Columns[3].Width = AppSettings.Default.CWidth_time;
+
+        //}
+
     }
     public class common
     {

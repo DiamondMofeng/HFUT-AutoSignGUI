@@ -178,5 +178,53 @@ namespace HFUT_AutoSignGUI {
                 this["receiver2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("140")]
+        public int CWidth_acc {
+            get {
+                return ((int)(this["CWidth_acc"]));
+            }
+            set {
+                this["CWidth_acc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int CWidth_id {
+            get {
+                return ((int)(this["CWidth_id"]));
+            }
+            set {
+                this["CWidth_id"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int CWidth_mode {
+            get {
+                return ((int)(this["CWidth_mode"]));
+            }
+            set {
+                this["CWidth_mode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int CWidth_time {
+            get {
+                return ((int)(this["CWidth_time"]));
+            }
+            set {
+                this["CWidth_time"] = value;
+            }
+        }
     }
 }
