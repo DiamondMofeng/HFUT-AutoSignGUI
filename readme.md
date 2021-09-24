@@ -52,6 +52,10 @@
 
 软件提供了登录、邮件模块的单独测试、整体测试 以及 直接执行已创建任务 的多种测试方法，可有效测试设置的有效性
 
+### 使用方法
+
+![image](https://z3.ax1x.com/2021/09/24/40xZSe.jpg)
+
 ## 贡献者：
 [Spartan-zhu](https://github.com/Spartan-zhu) for debugging
 
